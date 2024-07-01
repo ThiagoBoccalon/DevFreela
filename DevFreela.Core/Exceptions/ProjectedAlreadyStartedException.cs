@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace DevFreela.Core.Exceptions
 {
-    public class ProjectedAlreadyStartedException : Exceptions
+    public class ProjectedAlreadyStartedException : Exception
     {
         protected ProjectedAlreadyStartedException() : base("Projected has already started status")
         {            

@@ -13,6 +13,6 @@ namespace DevFreela.Core.Entities
             CreatedAt = DateTime.Now;
         }
         public string Description { get; private set; }
-        public DateTimne CreatedAt { get; private set; }
+        public DateTime CreatedAt { get; private set; }
     }
 }
