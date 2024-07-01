@@ -1,4 +1,10 @@
-﻿namespace DevFreela.API.ViewModels
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DevFreela.Application.ViewModels
 {
     public class SkillViewModel
     {
@@ -7,6 +13,7 @@
             Id = id;
             Description = description;
         }
+
         public int Id { get; private set; }
         public string Description { get; private set; }
     }
