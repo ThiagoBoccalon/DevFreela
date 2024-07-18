@@ -1,5 +1,8 @@
 ﻿
+using DevFreela.Core.Entities;
+using DevFreela.Core.Repositories;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +13,20 @@ namespace DevFreela.Application.Commands.CreateProject
 {
     public class CreateProjectCommandHandler : IRequestHandler<CreateProjectCommand, int>
     {
-        public Task<int> Handle(CreateProjectCommand request, CancellationToken cancellationToken)
+        private readonly IProjectRepository _projectRepository;
+
+        public CreateProjectCommandHandler(IProjectRepository projectRepository)
         {
-            throw new NotImplementedException();
+            _projectRepository = projectRepository;
+        }
+
+        public async Task<int> Handle(CreateProjectCommand request, CancellationToken cancellationToken)
+        {
+            var project = new Project(request.Title, request.Description, request.IdClient, request.IdFreelancer, request.TotalCost);
+
+            await _projectRepository.AddAsync(project);
+
+            return project.Id;
         }
     }
 }

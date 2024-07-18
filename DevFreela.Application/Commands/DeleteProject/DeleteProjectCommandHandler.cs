@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using DevFreela.Core.Repositories;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,22 @@ namespace DevFreela.Application.Commands.DeleteProject
 {
     public class DeleteProjectCommandHandler : IRequestHandler<DeleteProjectCommand, Unit>
     {
-        public Task<Unit> Handle(DeleteProjectCommand request, CancellationToken cancellationToken)
+        private readonly IProjectRepository _projectRepository;
+        public DeleteProjectCommandHandler(IProjectRepository projectRepository)
         {
-            throw new NotImplementedException();
+            _projectRepository = projectRepository;
+        }
+
+        public async Task<Unit> Handle(DeleteProjectCommand request, CancellationToken cancellationToken)
+        {
+            var project = await _projectRepository.GetByIdAsync(request.Id);
+
+            project.Cancel();
+
+            await _projectRepository.SaveChangesAsync();
+
+            return Unit.Value;
+
         }
     }
 }

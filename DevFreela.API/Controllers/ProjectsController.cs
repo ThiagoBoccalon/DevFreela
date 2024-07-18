@@ -93,7 +93,7 @@ namespace DevFreela.API.Controllers
 
         [HttpPost("{id}/comments")]
         public async Task<IActionResult> PostComment(int id, [FromBody] CreateCommentCommand command)
-        {
+        {            
             await _mediator.Send(command);
 
             return NoContent();
