@@ -20,7 +20,7 @@ namespace DevFreela.API.Controllers
         
         private readonly IMediator _mediator;
 
-        public UsersController(Mediator mediator)
+        public UsersController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -30,7 +30,7 @@ namespace DevFreela.API.Controllers
         {
             var query = new GetUserQuery(id);
 
-            var user =  _mediator.Send(query);
+            var user = await _mediator.Send(query);
 
             if(user == null)
             {
