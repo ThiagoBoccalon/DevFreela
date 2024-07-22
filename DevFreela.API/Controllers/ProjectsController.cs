@@ -16,6 +16,7 @@ using DevFreela.Application.Queries.GetAllProjects;
 using DevFreela.Application.Queries.GetProjectById;
 using DevFreela.Application.Services.Interfaces;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -24,6 +25,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 namespace DevFreela.API.Controllers
 {    
     [Route("api/projects")]
+    [Authorize]
     public class ProjectsController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -33,7 +35,7 @@ namespace DevFreela.API.Controllers
         }   
 
         [HttpGet]
-        public async Task<IActionResult> Get(string query)
+        public async Task<IActionResult> Get(string? query)
         {
             var getAllProjectQuery = new GetAllProjectsQuery(query);
 
