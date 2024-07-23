@@ -78,10 +78,10 @@ builder.Services.AddSwaggerGen(c =>
                       ValidateLifetime = true,
                       ValidateIssuerSigningKey = true,
 
-                      ValidIssuer = "Jwt:Issuer",
-                      ValidAudience = "Jwt:Audience",
+                      ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                      ValidAudience = builder.Configuration["Jwt:Audience"],
                       IssuerSigningKey = new SymmetricSecurityKey
-                      (Encoding.UTF8.GetBytes("Jwt:Key"))
+                      (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
                   };
               });
 
