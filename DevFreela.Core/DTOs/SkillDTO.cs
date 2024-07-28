@@ -10,5 +10,11 @@ namespace DevFreela.Core.DTOs
     {
         public int Id { get; set; }
         public string Description { get; set; }
+
+        public SkillDTO(int id, string description) 
+        {
+            Id = id;
+            Description = description;
+        }
     }
 }
