@@ -23,8 +23,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<OpeningTimeOption>(builder.Configuration.GetSection("OpeningTime"));
 
 var connectionString = builder.Configuration.GetConnectionString("DevFreelaCs");
+/*
 builder.Services.AddDbContext<DevFreelaDbContext>(
     options => options.UseSqlServer(connectionString));
+*/
+
+builder.Services.AddDbContext<DevFreelaDbContext>(options => options.UseInMemoryDatabase("DevFreelaDb"));
 
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 builder.Services.AddScoped<ISkillRepository, SkillRepository>();
